@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulte seu CEP</title>
+</head>
+<body>
+    <h1>Cadastro de Usuário</h1>
+    <fieldset>
+        <legend>Endereço</legend>
+
+        <label for="cep">CEP</label>
+        <input type="text" id="cep"  autocomplete="off">
+        <br><br>
+
+        <label for="rua">Rua</label>
+        <input type="text" id="rua" readonly>
+        <br><br>
+
+        <label for="cep">Número</label>
+        <input type="text" id="numero">
+        <br><br>
+
+        <label for="bairro">Bairro</label>
+        <input type="text" id="bairro" readonly>
+        <br><br>
+
+        <label for="cidade">Cidade</label>
+        <input type="text" id="cidade" readonly>
+        <br><br>
+
+        <label for="estado">Estado</label>
+        <input type="text" id="estado" readonly>
+        <br><br>
+
+    </fieldset>
+
+    <script> 
+        //Preencher os inputs com Função (Arrow Functions)
+        const preencherFormulario = (endereco => {
+            document.getElementById("rua").value = endereco.logradouro;
+            document.getElementById("bairro").value = endereco.bairro;
+            document.getElementById("cidade").value = endereco.localidade;
+            document.getElementById("estado").value = endereco.uf;
+        })
+        //Auto Preenchimento
+        const cepValido = (cep) => {
+            if (cep.lenght == 8) {
+                return true;
+        } else {
+            return false;
+        }
+
+        }
+               
+
+        //Buscar API
+        const PesquisaCep = async () =>  {
+            const cep = document.getElementById("cep").value;
+            const url = `https://viacep.com.br/ws/01001000/json/`
+            const dados = await fetch (url);
+            const endereco = await dados.json();
+            if (cepValido(cep)) {
+                const dados = await fetch (url);
+                const endereco = await dados.json();
+                preencherFormulario(endereco)
+            }
+        }
+        //Chamar a função
+        document.getElementById("cep").addEventListener("focusout", PesquisaCep)
+    </script>
+</body>
+</html>

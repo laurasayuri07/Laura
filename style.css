@@ -1,0 +1,22 @@
+h1 {
+   
+    margin-left: 800px
+}
+
+fieldset {
+    background-color: rgb(201, 173, 214);
+   border-radius: 30px;
+   margin-left: 70px;
+   margin-right: 80px;
+   height: 240px;
+}
+
+label {
+    margin-left: 750px;
+   
+}
+
+legend {
+    margin-left: 300px;
+}
+
